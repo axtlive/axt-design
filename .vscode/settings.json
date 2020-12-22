@@ -7,6 +7,8 @@
     { "language": "typescriptreact", "autoFix": true }
   ],
   "cSpell.words": [
+    "fontawesome",
+    "fortawesome",
     "submenu"
   ]
 }
