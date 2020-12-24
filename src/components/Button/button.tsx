@@ -6,11 +6,17 @@ export type ButtonsSize = "lg" | "sm";
 export type ButtonType = "primary" | "default" | "danger" | "link";
 
 interface BaseButtonProps {
+  /**给 Button 添加的类名 */
   className?: string;
+  /**是否禁用 Button */
   disabled?: boolean;
+  /**给 Button 添加大小 可选 lg | sm */
   size?: ButtonsSize;
+  /**Button 的类型 可选  primary | default | danger | link*/
   btnType?: ButtonType;
+  /**子节点 */
   children: React.ReactNode;
+  /**类型为 link 时的 href 链接 */
   href?: string;
 }
 
