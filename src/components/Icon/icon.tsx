@@ -1,4 +1,6 @@
 import React from "react";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
 import {
   FontAwesomeIcon,
@@ -19,7 +21,8 @@ export interface IconProps extends FontAwesomeIconProps {
   theme?: ThemeProps;
 }
 
-const Icon: React.FC<IconProps> = (props) => {
+library.add(fas);
+export const Icon: React.FC<IconProps> = (props) => {
   const { className, theme, ...restProps } = props;
   const classes = classNames("axtlive-icon", className, {
     [`icon-${theme}`]: theme,

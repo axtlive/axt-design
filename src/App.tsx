@@ -1,4 +1,5 @@
 import React from "react";
+
 import Button from "./components/Button/button";
 import Menu from "./components/Menu/menu";
 import MenuItem from "./components/Menu/menuItem";
@@ -44,7 +45,7 @@ function App() {
       </div>
 
       <div>
-        <Icon icon="arrow-alt-circle-down" theme="primary" size="10x" />
+        <Icon icon="search" theme="primary" size="10x" />
       </div>
     </div>
   );

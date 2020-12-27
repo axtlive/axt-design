@@ -24,11 +24,7 @@ const disabledInput = () => (
 );
 
 const iconInput = () => (
-  <Input
-    style={{ width: "300px" }}
-    icon="search"
-    placeholder="input with icon"
-  />
+  <Input icon="list" style={{ width: "300px" }} placeholder="input with icon" />
 );
 
 const sizeInput = () => (
