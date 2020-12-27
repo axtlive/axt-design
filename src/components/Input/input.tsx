@@ -25,15 +25,12 @@ export interface InputProps
   /**onChange 事件 */
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
-/**
- * Input 输入框 通过鼠标或者键盘输入内容 是最基础的表单域的包装
- * 支持HTMLInput 的所有基本属性
- * @param props
- * ```js
- * import { Input } from 'axt-design'
- * ```
- */
 
+/**
+ * @description: Input 输入框 通过鼠标或者键盘输入内容 是最基础的表单域的包装 支持HTMLInput 的所有基本属性
+ * @param {FC<InputProps>} props
+ * @return {JSX} ReactNode
+ */
 export const Input: FC<InputProps> = (props) => {
   // 取除所有的属性
   const { disabled, size, icon, prefix, suffix, style, ...restProps } = props;

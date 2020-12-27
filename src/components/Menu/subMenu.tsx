@@ -1,4 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, {
+  useState,
+  useContext,
+  MouseEvent,
+  FunctionComponentElement,
+} from "react";
 import Transition from "../Transition/transition";
 import classNames from "classnames";
 import { MenuContext } from "./menu";
@@ -11,6 +16,11 @@ export interface SubMenuProps {
   className?: string;
 }
 
+/**
+ * @description: Submenu 显影具有动画的二级菜单
+ * @param {FC<SubMenuProps>} props
+ * @return {JSX} ReactNode
+ */
 const SubMenu: React.FC<SubMenuProps> = ({
   index,
   title,
@@ -29,41 +39,61 @@ const SubMenu: React.FC<SubMenuProps> = ({
     "is-opened": menuOpen,
     "is-vertical": context.mode === "vertical",
   });
-  const handleClick = (e: React.MouseEvent) => {
+
+  /**
+   * @description 鼠标点击事件
+   */
+  const handleClick = (e: MouseEvent) => {
     e.preventDefault();
     setOpen(!menuOpen);
   };
+
+  /**
+   * @description 鼠标移入移出事件处理函数
+   */
   let timer: any;
-  const handleMouse = (e: React.MouseEvent, toggle: boolean) => {
+  const handleMouse = (e: MouseEvent, toggle: boolean) => {
     clearTimeout(timer);
     e.preventDefault();
     timer = setTimeout(() => {
       setOpen(toggle);
     }, 300);
   };
+
+  /**
+   * @description 鼠标点击事件 模式为竖直时存在
+   */
   const clickEvents =
     context.mode === "vertical"
       ? {
           onClick: handleClick,
         }
       : {};
+
+  /**
+   * @description 鼠标移入移出绑定的事件
+   */
   const hoverEvents =
     context.mode !== "vertical"
       ? {
-          onMouseEnter: (e: React.MouseEvent) => {
+          onMouseEnter: (e: MouseEvent) => {
             handleMouse(e, true);
           },
-          onMouseLeave: (e: React.MouseEvent) => {
+          onMouseLeave: (e: MouseEvent) => {
             handleMouse(e, false);
           },
         }
       : {};
+
+  /**
+   * @description 渲染子元素
+   */
   const renderChildren = () => {
     const subMenuClasses = classNames("axtlive-submenu", {
       "menu-opened": menuOpen,
     });
     const childrenComponent = React.Children.map(children, (child, i) => {
-      const childElement = child as React.FunctionComponentElement<MenuItemProps>;
+      const childElement = child as FunctionComponentElement<MenuItemProps>;
       if (childElement.type.displayName === "MenuItem") {
         return React.cloneElement(childElement, {
           index: `${index}-${i}`,

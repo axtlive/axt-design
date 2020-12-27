@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, MouseEvent } from "react";
 import classNames from "classnames";
 import { MenuContext } from "./menu";
 
@@ -9,6 +9,11 @@ export interface MenuItemProps {
   style?: React.CSSProperties;
 }
 
+/**
+ * @description: Menu 或 Submenu 的子元素
+ * @param {FC<MenuItemProps>} props
+ * @return {JSX} ReactNode
+ */
 const MenuItem: React.FC<MenuItemProps> = (props) => {
   const { index, disabled, className, style, children } = props;
   const context = useContext(MenuContext);
@@ -16,7 +21,11 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     "is-disabled": disabled,
     "is-active": context.index === index,
   });
-  const handleClick = (e: React.MouseEvent) => {
+  /**
+   * @description 元素被点击的时候触发事件
+   * @param {MouseEvent} e
+   */
+  const handleClick = (e: MouseEvent) => {
     if (context.onSelect && !disabled && typeof index === "string") {
       e.stopPropagation();
       context.onSelect(index);

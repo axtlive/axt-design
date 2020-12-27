@@ -7,6 +7,8 @@ import {
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
 
+library.add(fas);
+
 export type ThemeProps =
   | "primary"
   | "secondary"
@@ -21,7 +23,11 @@ export interface IconProps extends FontAwesomeIconProps {
   theme?: ThemeProps;
 }
 
-library.add(fas);
+/**
+ * @description: Icon 封装 FontAwesomeIcon 添加 theme
+ * @param {FC<IconProps>} props
+ * @return {JSX} ReactNode JSX
+ */
 export const Icon: React.FC<IconProps> = (props) => {
   const { className, theme, ...restProps } = props;
   const classes = classNames("axtlive-icon", className, {

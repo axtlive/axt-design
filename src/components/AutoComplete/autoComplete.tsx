@@ -23,26 +23,31 @@ export type DataSourceType<T = {}> = T & DataSourceObject;
 
 export interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
   /**
-   * 返回输入建议的方法
-   * 可以拿到当前的输入
-   * 然后返回同步的数组
-   * 或者是异步的 Promise
-   * type DataSourceType<T = {}> = T & DataSourceObject
+   * @description 返回输入建议的方法 可以拿到当前的输入 然后返回同步的数组 或者是异步的 Promise
+   * @param {string} str
+   * @return {DataSourceType<T = {}> = T & DataSourceObject} []
    */
   fetchSuggestions: (
     str: string,
   ) => DataSourceType[] | Promise<DataSourceType[]>;
   /**
-   * 点击选中建议项时触发的回调
+   * @description 点击选中建议项时触发的回调
+   * @param {DataSourceType} item
    */
   onSelect?: (item: DataSourceType) => void;
   /**
-   * 支持自定义渲染下拉项
-   * 返回 ReactElement
+   * @description 支持自定义渲染下拉项
+   * @param {DataSourceType} item
+   * @return ReactElement
    */
   renderOption?: (item: DataSourceType) => ReactElement;
 }
 
+/**
+ * @description: AutoComplete 联想输入框 可根据输入的值 联想出从静态数据结构或后端服务返回的数据中的值
+ * @param {FC<AutoCompleteProps>} props
+ * @return {JSX} ReactNode JSX
+ */
 export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   const {
     fetchSuggestions,
@@ -63,9 +68,8 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   useClickOutside(componentRef, () => setSuggestions([]));
 
   /**
-   * 监听 input 里加了防抖后的值
-   * 变化后调用异步函数 fetchSuggestions 进行数据返回
-   * 并设置 loading
+   * @description 监听 input 里加了防抖后的值 变化后调用异步函数 fetchSuggestions 进行数据返回 并设置 loading
+   * @dependence debouncedValue
    */
   useEffect(() => {
     if (debouncedValue && triggerSearch.current) {
@@ -91,8 +95,8 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   }, [debouncedValue]);
 
   /**
-   * 高亮设置的函数
-   * @param index
+   * @description: 高亮设置的函数
+   * @param {number} index
    */
   const highLight = (index: number) => {
     if (index < 0) index = 0;
@@ -101,8 +105,8 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   };
 
   /**
-   * 在 Input 里使用键盘的事件监听
-   * @param e KeyboardEvent<HTMLInputElement> | any
+   * @description 在 Input 里使用键盘的事件监听
+   * @param {KeyboardEvent<HTMLInputElement> | any} e
    */
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement> | any) => {
     // 'keyCode' is deprecated
@@ -126,10 +130,8 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   };
 
   /**
-   * 输入框内容变化监听函数
-   * 设置受控组件 Input 的值
-   * 设置下部分联想列表
-   * @param e ChangeEvent<HTMLInputElement>
+   * @description 输入框内容变化监听函数 设置受控组件 Input 的值 设置下部分联想列表
+   * @param  {ChangeEvent<HTMLInputElement>} e
    */
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
@@ -138,10 +140,8 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   };
 
   /**
-   * 联想列表的值点击函数
-   * 设置受控组件 Input 内的值
-   * 设置联想列表为空（隐藏）
-   * @param item
+   * @description 联想列表的值点击函数 设置受控组件 Input 内的值 设置联想列表为空（隐藏）
+   * @param {DataSourceType} item
    */
   const handleSelect = (item: DataSourceType) => {
     setInputValue(item.value);
@@ -151,17 +151,16 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
   };
 
   /**
-   * 自定义渲染模板
-   * 有 renderOption 就用 renderOption
-   * 没有就用 item
-   * @param item
+   * @description 自定义渲染模板 有 renderOption 就用 renderOption 没有就用 item
+   * @param {DataSourceType} item
+   * @return renderOption() | item.value;
    */
   const renderTemplate = (item: DataSourceType) => {
     return renderOption ? renderOption(item) : item.value;
   };
 
   /**
-   * 添加了动画效果的渲染联想列表
+   * @description 添加了动画效果的渲染联想列表
    */
   const generateDropdown = () => {
     return (
