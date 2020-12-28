@@ -1,5 +1,7 @@
 import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
+import Icon from "../Icon/icon";
 
 export type ButtonsSize = "lg" | "sm";
 
@@ -18,6 +20,7 @@ interface BaseButtonProps {
   children: React.ReactNode;
   /**类型为 link 时的 href 链接 */
   href?: string;
+  icon?: IconProp;
 }
 
 type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
@@ -34,6 +37,7 @@ export const Button: FC<ButtonProps> = (props) => {
     size,
     children,
     href,
+    icon,
     ...restProps
   } = props;
   const classes = classNames("btn", className, {
@@ -50,6 +54,7 @@ export const Button: FC<ButtonProps> = (props) => {
   }
   return (
     <button className={classes} disabled={disabled} {...restProps}>
+      {icon && <Icon className="btn-icon" icon={icon} />}
       {children}
     </button>
   );

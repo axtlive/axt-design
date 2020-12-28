@@ -5,7 +5,9 @@ import { action } from "@storybook/addon-actions";
 import Button from "./button";
 
 const defaultButton = () => (
-  <Button onClick={action("clicked")}>default button</Button>
+  <Button btnType="primary" icon="search" onClick={action("clicked")}>
+    default button
+  </Button>
 );
 
 const buttonWithSize = () => (

@@ -1,5 +1,6 @@
 import { FC, ChangeEvent } from "react";
 import axios from "axios";
+import Button from "./components/Button/button";
 
 const App: FC = () => {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,8 +21,11 @@ const App: FC = () => {
     }
   };
   return (
-    <div style={{ marginTop: "100px" }}>
-      <input type="file" name="myFile" onChange={handleFileChange} />
+    <div style={{ marginTop: "100px", marginLeft: "100px" }}>
+      <Button btnType="primary" icon="download">
+        确定
+      </Button>
+      {/* <input type="file" name="myFile" onChange={handleFileChange} /> */}
     </div>
   );
 };
