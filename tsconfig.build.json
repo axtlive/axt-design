@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // 输出位置
-    "outDir": "build",
+    "outDir": "dist",
     // 输出类型
     "module": "esnext",
     // 编译后的标准
