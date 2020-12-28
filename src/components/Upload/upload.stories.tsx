@@ -31,12 +31,33 @@ const filePromise = (file: File) => {
 
 const simpleUpload = () => {
   return (
-    <Upload
-      // action="http://jsonplaceholder.typicode.com/posts/"
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      onChange={action("change")}
-      defaultFileList={defaultFileList}
-    />
+    <div>
+      <Upload
+        // action="http://jsonplaceholder.typicode.com/posts/"
+        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        onChange={action("change")}
+        fileName="myFile"
+        accept=".pdf"
+        multiple
+        // drag
+        extraData={{ destination: "shanghai" }}
+        headers={{ "X-Powered-By": "axtlive" }}
+        // defaultFileList={defaultFileList}
+      >
+        {/* <button>上传</button> */}
+      </Upload>
+      <Upload
+        // action="http://jsonplaceholder.typicode.com/posts/"
+        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        onChange={action("change")}
+        fileName="myFile"
+        accept=".pdf"
+        multiple
+        drag
+        extraData={{ destination: "shanghai" }}
+        headers={{ "X-Powered-By": "axtlive" }}
+      />
+    </div>
   );
 };
 
