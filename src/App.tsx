@@ -1,8 +1,10 @@
-import { FC, ChangeEvent } from "react";
+import { FC, ChangeEvent, useState } from "react";
 import axios from "axios";
 import Button from "./components/Button/button";
+import Alert from "./components/Alert/alert";
 
 const App: FC = () => {
+  const [canSee, setCanSee] = useState(false);
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -21,11 +23,22 @@ const App: FC = () => {
     }
   };
   return (
-    <div style={{ marginTop: "100px", marginLeft: "100px" }}>
-      <Button btnType="primary" icon="download">
+    <div>
+      <Button
+        btnType="primary"
+        icon="download"
+        onClick={() => setCanSee(!canSee)}
+      >
         确定
       </Button>
-      {/* <input type="file" name="myFile" onChange={handleFileChange} /> */}
+      {canSee && (
+        <Alert
+          title="提示标题欧亲"
+          description="this is a long description"
+          closable
+          onClose={() => {}}
+        />
+      )}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import axios from "axios";
 import UploadList from "./uploadList";
 import Button from "../Button/button";
 import Dragger from "./dragger";
+import Icon from "../Icon/icon";
 
 export type UploadFileStatus = "ready" | "uploading" | "success" | "error";
 
@@ -224,11 +225,16 @@ const Upload: FC<UploadProps> = (props) => {
         onClick={handleClick}
       >
         {drag ? (
-          <Dragger onFile={(files) => uploadFiles(files)}>{children}</Dragger>
+          <Dragger onFile={(files) => uploadFiles(files)}>
+            {<Icon icon="upload" />}
+            {children}
+          </Dragger>
         ) : children ? (
           children
         ) : (
-          <Button btnType="primary">点击上传</Button>
+          <Button btnType="primary" icon="upload">
+            上传文件
+          </Button>
         )}
         <input
           className="axtlive-file-input"

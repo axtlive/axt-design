@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 // import { action } from '@storybook/addon-actions'
+import Icon from "../Icon/icon";
 import Input from "./input";
 const ControlledInput = () => {
   const [value, setValue] = useState("");
@@ -41,11 +42,16 @@ const preOrSuffixInput = () => (
       defaultValue="prepend text"
       prefix="https://"
     />
+    <Input
+      style={{ width: "300px" }}
+      defaultValue="prepend text"
+      prefix={<Icon icon="spinner" spin />}
+    />
     <Input style={{ width: "300px" }} suffix=".com" defaultValue="google" />
   </React.Fragment>
 );
 
-storiesOf("Input Component", module)
+storiesOf("Input 组件", module)
   .add("Input", defaultInput)
   .add("被禁用的 Input", disabledInput)
   .add("带图标的 Input", iconInput)

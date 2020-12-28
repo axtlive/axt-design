@@ -61,4 +61,4 @@ const simpleUpload = () => {
   );
 };
 
-storiesOf("simpleUpload Component", module).add("simpleUpload", simpleUpload);
+storiesOf("Upload 组件", module).add("simpleUpload", simpleUpload);
